@@ -1,4 +1,5 @@
-import { filterByCategory, searchCoffee } from "../actions/coffeeActions";
+import { Reducer } from "redux";
+import { CoffeeAction } from "../actions/coffeeActions";
 
 interface Coffee {
   title: string;
@@ -8,12 +9,10 @@ interface Coffee {
   id: number;
 }
 
-interface CoffeeState {
+export interface CoffeeState {
   coffees: Coffee[];
   filteredCoffees: Coffee[];
 }
-
-type CoffeeAction = ReturnType<typeof filterByCategory | typeof searchCoffee>;
 
 const initialState: CoffeeState = {
   coffees: [
@@ -439,7 +438,10 @@ const initialState: CoffeeState = {
   ],
 };
 
-const coffeeReducer = (state = initialState, action: CoffeeAction) => {
+const coffeeReducer: Reducer<CoffeeState, CoffeeAction> = (
+  state = initialState,
+  action
+): CoffeeState => {
   switch (action.type) {
     case "FILTER_BY_CATEGORY":
       return {
