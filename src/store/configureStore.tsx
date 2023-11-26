@@ -17,3 +17,14 @@ const store = configureStore({
 });
 
 export default store;
+
+// import { configureStore } from '@reduxjs/toolkit';
+// import coffeeReducer from '../reducers/coffeeReducer';
+
+// const store = configureStore({
+//   reducer: {
+//     coffee: coffeeReducer,
+//   },
+// });
+
+// export default store;
