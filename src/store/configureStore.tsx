@@ -1,20 +1,23 @@
-import { configureStore, Reducer } from "@reduxjs/toolkit";
-import coffeeReducer, { CoffeeState } from "../reducers/coffeeReducer";
-import { CoffeeAction } from "../actions/coffeeActions";
+// src/store.ts
 
-const rootReducer: Reducer<CoffeeState, CoffeeAction> = (
-  state = { coffees: [], filteredCoffees: [] },
-  action
-) => {
-  if ("type" in action) {
-    return coffeeReducer(state, action);
-  }
-  return state;
-};
+import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import coffeeReducer from "../reducers/coffeeReducer";
+import thunk from "redux-thunk";
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    coffee: coffeeReducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
 
 export default store;
 
