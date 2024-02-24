@@ -12,18 +12,23 @@ const App: React.FC = () => {
     dispatch(searchCoffee(searchTerm));
   }, [dispatch, searchTerm]);
 
-  useEffect(() => {
-    // Execute search logic when searchTerm changes
-    handleSearch();
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   // Execute search logic when searchTerm changes
+  //   handleSearch();
+  // }, [searchTerm]);
 
   const handleCategoryFilter = (category: string) => {
     dispatch(filterByCategory(category));
   };
 
-  const handleSearch = () => {
-    console.log("Search Term:", searchTerm);
-    dispatch(searchCoffee(searchTerm));
+  // const handleSearch = (updatedValue?: string) => {
+  //   console.log("Search Term:", updatedValue || searchTerm);
+  //   dispatch(searchCoffee(updatedValue || searchTerm));
+  // };
+
+  const handleClear = () => {
+    setSearchTerm(""); // Clear the search term
+    dispatch(searchCoffee("")); // Trigger search with an empty string
   };
 
   const handleShowAll = () => {
@@ -43,11 +48,13 @@ const App: React.FC = () => {
               e.persist();
               const updatedValue = e.target.value;
               setSearchTerm(updatedValue);
-              handleSearch(updatedValue);
+              // handleSearch(updatedValue);
             }}
             value={searchTerm}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button className="clear-button" onClick={handleClear}>
+            Clear
+          </button>
         </div>
         <button onClick={handleShowAll}>Show All Coffees</button>
         <button onClick={() => handleCategoryFilter("hot")}>Hot Coffees</button>

@@ -37,6 +37,12 @@ button:hover {
   background-color: #45a049;
 }
 
+.clear-button {
+  background-color: rgb(155, 35, 35);
+}
+.clear-button:hover {
+  background-color: rgb(224, 22, 22);
+}
 ul {
   list-style-type: none;
   padding: 0;
